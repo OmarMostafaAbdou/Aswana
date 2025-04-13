@@ -12,8 +12,10 @@ class UserController {
   GetAllUsers = asyncRouterWrapper(async (req: Request, res: Response): Promise<void> => {
     const page = req.query.page ? Number(req.query.page) : undefined;
     const limit = req.query.limit ? Number(req.query.limit) : undefined;
+    const lang = res.locals.lang || "en"; 
 
-    const allUsers = await this.userService.getAllUsers(page, limit);
+
+    const allUsers = await this.userService.getAllUsers(page, limit,lang);
 
     res.status(200).json({
       success: true,

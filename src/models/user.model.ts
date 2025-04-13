@@ -2,6 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 import _ from "lodash"
 import { JwtPayload } from 'jsonwebtoken';
+import { ToJSONLangOptions } from 'types/user';
 const jwT=require("jsonwebtoken")
 const util=require("util")
 const signJWT=util.promisify(jwT.sign)
@@ -12,17 +13,22 @@ interface TokenPayload extends JwtPayload {
   }
   
 
-
-export interface IUser extends Document{
+  export interface IUser extends Document{
     generateToken(): void;
-    first_name:string,
-    last_name:String,
-    username:string,
-    phone:string,
-    email:string,
+    first_name: {
+        en: string;
+        ar: string;
+    },
+    last_name: {
+        en: string;
+        ar: string;
+    },
+    username: string,
+    phone: string,
+    email: string,
     password: string;
     role: 'user' | 'admin';
-    comparePassword(password:string):Promise<boolean>
+    comparePassword(password: string): Promise<boolean>
 }
 
 const {SaltRounds, JWTSecret} = require("../Configs/Configs")
@@ -32,20 +38,27 @@ console.log(JWTSecret);
 
 const UserSchema:Schema<IUser>=new Schema({
     username:{type:String,required:true},
-    first_name:{type:String,required:true},
-    last_name:{type:String,required:true},
+    first_name: {
+      en: {type: String, required: true},
+      ar: {type: String, required: true}
+  },
+  last_name: {
+      en: {type: String, required: true},
+      ar: {type: String, required: true}
+  },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
-   
-
-
-
-
-}, {
+   }, {
     toJSON:{
-        transform:(doc,ret)=>{
-         return _.omit(ret,["__v","password"])
+      transform: (doc, ret, options?: ToJSONLangOptions & mongoose.ToObjectOptions) => {
+        const lang = options?.lang || 'en';
+
+          ret.first_name = ret.first_name?.[lang] || ret.first_name?.en;
+          ret.last_name = ret.last_name?.[lang] || ret.last_name?.en; 
+          ret.id = ret._id;
+
+         return _.omit(ret,["__v","password","_id"])
         }
     
     }

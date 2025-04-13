@@ -1,4 +1,5 @@
 const { Port } = require("./Configs/Configs");
+import languageMiddleware from 'middlewares/languageMiddleware';
 import Database from './db/database';
 import express, { Request, Response, NextFunction } from 'express';
 
@@ -10,12 +11,13 @@ app.use(express.urlencoded({ extended: true }));
 const authRouter = require("./routes/auth.routes");
 const userRouter = require("./routes/user.routes");
 
+
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.send("Hello world");
 });
 
-app.use('/auth', authRouter);
-app.use('/user', userRouter);
+app.use('/:lang/auth', languageMiddleware, authRouter);
+app.use('/:lang/user', languageMiddleware, userRouter);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err);

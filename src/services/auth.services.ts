@@ -3,16 +3,36 @@ import { IUser } from "models/user.model";
 const UserModel = require("../models/user.model");
 import { UseData } from "types/user";
 
- class AuthServices {
+class AuthServices {
   async register(data: UseData): Promise<IUser> {
-    const { email, password, first_name, last_name, phone, username,role } = data;
+    const {
+      email,
+      password,
+      first_name,
+      last_name,
+      phone,
+      username,
+      role,
+      ar_first_name,
+      ar_last_name,
+    } = data;
 
     const existing = await UserModel.findOne({ email });
     if (existing) throw new CustomError("Email already in use", 400);
 
+    const firstName = {
+      en: first_name,
+      ar: ar_first_name,
+    };
+
+    const lastName = {
+      en: last_name,
+      ar: ar_last_name,
+    };
+
     const createdUser = new UserModel({
-      first_name,
-      last_name,
+      first_name: firstName,
+      last_name: lastName,
       password,
       phone,
       email,
@@ -20,12 +40,12 @@ import { UseData } from "types/user";
       role,
     });
 
-    const user = await createdUser.save()
+    const user = await createdUser.save();
 
     return user;
   }
-  async login(email: string, password: string): Promise<{ user: IUser; token: string,
-  }> {
+
+  async login(email: string, password: string): Promise<{ user: IUser; token: string }> {
     const user = await UserModel.findOne({ email });
 
     if (!user) {
@@ -41,9 +61,6 @@ import { UseData } from "types/user";
 
     return { user, token };
   }
-
-  
 }
-
 
 export default AuthServices;
