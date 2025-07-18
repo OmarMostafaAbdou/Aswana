@@ -9,6 +9,7 @@ const validate = (validatorsArray: ValidationChain[]) => {
 
     if (!errors.isEmpty()) {
       const err = new CustomError("Validator error", 422, errors.mapped());
+      
       return next(err);
     }
 

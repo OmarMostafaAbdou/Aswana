@@ -2,22 +2,29 @@ const { Port } = require("./Configs/Configs");
 import languageMiddleware from 'middlewares/languageMiddleware';
 import Database from './db/database';
 import express, { Request, Response, NextFunction } from 'express';
+import 'reflect-metadata';
+import { container } from 'tsyringe';
+
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const authRouter = require("./routes/auth.routes");
-const userRouter = require("./routes/user.routes");
+const authRouter = require("./modules/user/routes/auth.routes");
+const userRouter = require("./modules/user/routes/user.routes");
+const categoryRouter = require("./modules/category/routes/Category.routes");
+const ProductRouter = require("./modules/Products/routes/Product.routes");
 
 
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.send("Hello world");
 });
 
-app.use('/:lang/auth', languageMiddleware, authRouter);
+app.use('/auth', authRouter);
 app.use('/:lang/user', languageMiddleware, userRouter);
+app.use('/:lang/category', languageMiddleware, categoryRouter);
+app.use('/:lang/product', languageMiddleware, ProductRouter);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err);

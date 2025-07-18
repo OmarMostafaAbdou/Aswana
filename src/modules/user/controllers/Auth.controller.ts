@@ -1,12 +1,13 @@
-import AuthServices from "services/auth.services";
+import AuthServices from "modules/user/services/auth.services";
 import { Request, Response } from 'express';
 import asyncRouterWrapper from "helpers/asyncWrapper";
+import { injectable, inject } from 'tsyringe'; 
+@injectable()
 
 class AuthController{
-    private authService: AuthServices
-    constructor() {
-        this.authService = new AuthServices();
-      }
+    
+      constructor (@inject(AuthServices)private authService:AuthServices){}
+      
       userSignup = asyncRouterWrapper(async (req: Request, res: Response): Promise<void> => {
         const user = await this.authService.register(req.body);    
         const lang = res.locals.lang || "en";

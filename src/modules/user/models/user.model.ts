@@ -13,7 +13,7 @@ interface TokenPayload extends JwtPayload {
   }
   
 
-  export interface IUser extends Document{
+   export interface IUser extends Document{
     generateToken(): void;
     first_name: {
         en: string;
@@ -24,20 +24,22 @@ interface TokenPayload extends JwtPayload {
         ar: string;
     },
     username: string,
+    image:string
     phone: string,
     email: string,
     password: string;
-    role: 'user' | 'admin';
+    role: { type: String, enum: ['buyer',"seller", 'admin'], default: 'seller' },
     comparePassword(password: string): Promise<boolean>
 }
 
-const {SaltRounds, JWTSecret} = require("../Configs/Configs")
+const {SaltRounds, JWTSecret} = require("../../../Configs/Configs")
 console.log(JWTSecret);
 
 
 
 const UserSchema:Schema<IUser>=new Schema({
     username:{type:String,required:true},
+    image:{type:String,required:true},
     first_name: {
       en: {type: String, required: true},
       ar: {type: String, required: true}
@@ -48,9 +50,10 @@ const UserSchema:Schema<IUser>=new Schema({
   },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    role: { type: String, enum: ['user', 'admin'], default: 'user' },
+    role: { type: String, enum: ['buyer',"seller", 'admin'], default: 'seller' },
    }, {
     toJSON:{
+      timestamps: true,
       transform: (doc, ret, options?: ToJSONLangOptions & mongoose.ToObjectOptions) => {
         const lang = options?.lang || 'en';
 
@@ -98,4 +101,4 @@ UserModel.on("index", (err) => {
       console.log("Index done successfully ✅");
     }
 })
-module.exports=UserModel
+export {UserModel}    

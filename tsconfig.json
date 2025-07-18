@@ -11,7 +11,6 @@
     // "disableReferencedProjectLoad": true,             /* Reduce the number of projects loaded automatically by TypeScript. */
 
     /* Language and Environment */
-    "target": "es2016",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     // "lib": [],                                        /* Specify a set of bundled library declaration files that describe the target runtime environment. */
     // "jsx": "preserve",                                /* Specify what JSX code is generated. */
     // "libReplacement": true,                           /* Enable lib replacement. */
@@ -26,17 +25,21 @@
     // "moduleDetection": "auto",                        /* Control what method is used to detect module-format JS files. */
 
     /* Modules */
-    "module": "commonjs",                                /* Specify what module code is generated. */
+    "module": "commonjs",
+     "target": "es6",  
+       "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+                               /* Specify what module code is generated. */
     // "rootDir": "./",                                  /* Specify the root folder within your source files. */
     // "moduleResolution": "node10",                     /* Specify how TypeScript looks up a file from a given module specifier. */
     "baseUrl": "./src/",                                  /* Specify the base directory to resolve non-relative module names. */
      "paths": {
-      "@controllers/*": ["src/controllers/*"],
-      "@models/*": ["src/models/*"],
+      "@controllers/*": ["src/modules/user/controllers/*"],
+      "@models/*": ["src/modules/user/models/*"],
       "@middlewares/*": ["src/middlewares/*"],
-      "@services/*": ["src/services/*"],
+      "@services/*": ["src/modules/user/services/*"],
       "@utils/*": ["src/utils/*"],
-      "@routes/*": ["src/routes/*"],
+      "@routes/*": ["src/modules/user/routes/*"],
       "@config/*": ["src/config/*"],
       "@types/*": ["src/types/*"] 
      },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */

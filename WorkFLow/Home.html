@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>تحليل مشروع متجر التحف والمزادات</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f8f8f8;
+      padding: 20px;
+      direction: rtl;
+    }
+    h1, h2 {
+      color: #333;
+      background-color: #e0e0e0;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 8px 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #ddd;
+    }
+    ul {
+      line-height: 1.8;
+    }
+    section {
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📊 تحليل مشروع متجر التحف والمزادات</h1>
+
+  <section>
+    <h2>📌 جدول Categories (التصنيفات)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>الحقل</th>
+          <th>النوع</th>
+          <th>الوصف</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>_id</td><td>ObjectId</td><td>معرف التصنيف الفريد</td></tr>
+        <tr><td>name</td><td>String</td><td>اسم التصنيف</td></tr>
+        <tr><td>slug</td><td>String</td><td>اسم URL-friendly</td></tr>
+        <tr><td>parentId</td><td>ObjectId</td><td>تصنيف أب (اختياري)</td></tr>
+        <tr><td>icon</td><td>String</td><td>أيقونة التصنيف</td></tr>
+        <tr><td>createdAt</td><td>Date</td><td>تاريخ الإنشاء</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>🗂️ أمثلة على التصنيفات</h2>
+    <ul>
+      <li>تحف فنية > لوحات فنية، منحوتات</li>
+      <li>عملات قديمة > ذهبية، فضية</li>
+      <li>أثاث عتيق > طاولات، كراسي</li>
+      <li>كتب قديمة > مخطوطات، كتب نادرة</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>📌 Workflow (تدفق العمل)</h2>
+    <ul>
+      <li>1. تسجيل المستخدم (مشتري / بائع)</li>
+      <li>2. إضافة منتج للبيع أو المزاد</li>
+      <li>3. التصفح والبحث</li>
+      <li>4. تقديم مزايدة</li>
+      <li>5. انتهاء المزاد وتحديد الفائز</li>
+      <li>6. الشراء المباشر (إن وجد)</li>
+      <li>7. الدفع الإلكتروني</li>
+      <li>8. الشحن والتوصيل</li>
+      <li>9. التقييم</li>
+      <li>10. الإشعارات</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🎯 مثال عملي</h2>
+    <p>
+      منتج يبدأ بـ 1000 جنيه لمدة 3 أيام.<br />
+      3 مستخدمين قدموا مزايدات، أعلى مزايد بعد انتهاء الوقت هو الفائز، ثم يتم الدفع ثم الشحن.
+    </p>
+  </section>
+
+  <section>
+    <h2>📌 اقتراحات أسماء المشروع</h2>
+    <h3>🔹 كلاسيكية:</h3>
+    <ul>
+      <li>Antique Haven</li>
+      <li>Timeless Treasures</li>
+      <li>Heritage Bazaar</li>
+    </ul>
+
+    <h3>🔹 عربية:</h3>
+    <ul>
+      <li>مزاد العصور</li>
+      <li>كنوز الأجداد</li>
+      <li>تراثك</li>
+    </ul>
+
+    <h3>🔹 مودرن:</h3>
+    <ul>
+      <li>Bidzone</li>
+      <li>Rarely</li>
+      <li>SouqAntique</li>
+    </ul>
+  </section>
+
+</body>
+</html>

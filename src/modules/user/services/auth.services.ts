@@ -1,8 +1,11 @@
 import CustomError from "helpers/Errors";
-import { IUser } from "models/user.model";
-const UserModel = require("../models/user.model");
-import { UseData } from "types/user";
+import { IUser } from "../../user/models/user.model";
+const UserModel = require("..//models/user.model");
+import { UseData } from "../../../types/user";
+import { injectable } from "tsyringe";
 
+
+@injectable()
 class AuthServices {
   async register(data: UseData): Promise<IUser> {
     const {

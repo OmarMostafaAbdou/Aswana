@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import asyncRouterWrapper from 'helpers/asyncWrapper';
-import CustomError from 'helpers/Errors';
-import { user } from 'types/user';
-const UserModel = require("../models/user.model");
+import asyncRouterWrapper from '../helpers/asyncWrapper';
+import CustomError from '../helpers/Errors';
+import { user } from '../types/user';
+const UserModel = require("../modules/user/models/user.model");
 
 interface AuthenticatedRequest extends Request {
   user?: user;

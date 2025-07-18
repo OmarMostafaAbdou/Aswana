@@ -1,11 +1,12 @@
-import AuthController from 'controllers/Auth.controller';
+import AuthController from '../controllers/Auth.controller';
 import { Router } from 'express';
-import validate from 'middlewares/CheckValidator';
-import { loginValidation, signupValidation } from 'validators/Auth.validators';
-const checkRequireParams = require("../middlewares/CheckRequired");
+import validate from '../../../middlewares/CheckValidator';
+import { loginValidation, signupValidation } from '../../../validators/Auth.validators';
+import { container } from 'tsyringe';
+const checkRequireParams = require("../../../middlewares/CheckRequired");
 
 const router = Router();
-const authController = new AuthController();
+const authController = container.resolve(AuthController);
 
 router.post('/signup', 
   checkRequireParams(["username", "email", "password", "first_name", "last_name"]),
